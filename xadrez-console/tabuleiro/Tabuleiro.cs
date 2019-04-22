@@ -1,63 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace tabuleiro
+﻿namespace tabuleiro
 {
     class Tabuleiro
     {
-        public int Linhas { get; set; }
-        public int Colunas { get; set; }
-        private Peca[,] Pecas;
+
+        public int linhas { get; set; }
+        public int colunas { get; set; }
+        private Peca[,] pecas;
 
         public Tabuleiro(int linhas, int colunas)
         {
-            Linhas = linhas;
-            Colunas = colunas;
-            Pecas = new Peca[linhas, colunas];
+            this.linhas = linhas;
+            this.colunas = colunas;
+            pecas = new Peca[linhas, colunas];
         }
 
-        public Peca Peca(int linha, int coluna)
+        public Peca peca(int linha, int coluna)
         {
-            return Pecas[linha, coluna];
+            return pecas[linha, coluna];
         }
 
-        public Peca Peca (Posicao pos)
+        public Peca peca(Posicao pos)
         {
-            return Pecas[pos.Linha, pos.Coluna];
+            return pecas[pos.linha, pos.coluna];
         }
 
         public bool existePeca(Posicao pos)
         {
             validarPosicao(pos);
-            return Peca(pos) != null;
+            return peca(pos) != null;
         }
 
-        public void ColocarPeca(Peca p, Posicao pos)
+        public void colocarPeca(Peca p, Posicao pos)
         {
             if (existePeca(pos))
             {
                 throw new TabuleiroException("Já existe uma peça nessa posição!");
             }
-            Pecas[pos.Linha, pos.Coluna] = p;
-            p.Posicao = pos;
+            pecas[pos.linha, pos.coluna] = p;
+            p.posicao = pos;
         }
 
-        public Peca RetirarPeca(Posicao pos)
+        public Peca retirarPeca(Posicao pos)
         {
-            if (Peca(pos) == null)
+            if (peca(pos) == null)
             {
                 return null;
             }
-            Peca aux = Peca(pos);
-            aux.Posicao = null;
-            Pecas[pos.Linha, pos.Coluna] = null;
+            Peca aux = peca(pos);
+            aux.posicao = null;
+            pecas[pos.linha, pos.coluna] = null;
             return aux;
         }
 
         public bool posicaoValida(Posicao pos)
         {
-            if (pos.Linha < 0 || pos.Linha >= Linhas | pos.Coluna < 0 || pos.Coluna >= Colunas)
+            if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas)
             {
                 return false;
             }
