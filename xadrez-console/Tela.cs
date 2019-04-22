@@ -15,7 +15,10 @@ namespace xadrez_console
             Console.WriteLine();
             Console.WriteLine("Turno: " + partida.turno);
             Console.WriteLine("Esperando jogada de: " + partida.jogadorAtual);
-
+            if (partida.xeque == true)
+            {
+                Console.WriteLine("XEQUE!");
+            }
 
         }
 
